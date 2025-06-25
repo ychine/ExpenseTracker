@@ -70,9 +70,28 @@ if ($conn->connect_error) {
             
 
         </div>
+
+        <button id="addbtn" class="addbtn" onclick="toggleAddModal()">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                <rect x="16" y="6" width="4" height="24" rx="2" fill="#FFF"/>
+                <rect x="6" y="16" width="24" height="4" rx="2" fill="#FFF"/>
+            </svg>
+        </button>
+
+        <div id="bgblr" class="bgblr"></div>
+        <div id="add-modal" class="add-modal">
+            <?php include "./addmodal.php"; ?>
+        </div>
     </div>
 
+
+    <script src="./script.js"></script>
+
+
+
+
 </body>
+
 </html>
 
 

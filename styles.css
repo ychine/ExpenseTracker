@@ -1,5 +1,5 @@
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Roboto Flex', sans-serif;
     display: flex;
     align-items: center; 
     justify-content: center;          
@@ -31,9 +31,12 @@ body {
 
 .font-worksans { font-family: 'Work Sans', sans-serif; }
 
+
 .header h4 {
-    font-family: "Roboto Flex", sans-serif;
-    font-weight: 100;
+    
+    font-family: 'Roboto Flex', sans-serif !important;
+    font-weight: 300 !important;
+
     font-optical-sizing: auto;
     font-style: normal;
     -webkit-font-smoothing: antialiased;
@@ -69,7 +72,7 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
-
+    flex-direction: column;
     
 
 }
@@ -78,7 +81,7 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
 
 }
 
@@ -96,3 +99,127 @@ body {
    
 }
 
+.addbtn {
+    width: 73px;
+    height: 66px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    border: 4px solid #121212;
+    background: #000;
+    box-shadow: 0px 1px 7.8px 13px rgba(0, 0, 0, 0.68) inset, -3px -13px 32.8px 10px rgba(255, 255, 255, 0.25) inset, 1px 7px 22.9px 2px rgba(7, 22, 10, 0.81), 5px -4px 13.4px 0px #78AA96;
+}
+
+.add-modal {
+    visibility: hidden;
+    z-index: 20;
+}
+
+.add-modal.show {
+    visibility: visible;
+    z-index: 20;
+}
+
+.bgblr {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(20px);
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+}
+
+.bgblr.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.bgadd.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.addsmoothbox {
+    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 404px;
+    height: 528px;
+    flex-shrink: 0;
+    border-radius: 30px;
+    border: 6px solid #121212;
+    background: #000;
+    box-shadow: 0px 5px 17.8px 26px rgba(0, 0, 0, 0.61) inset, -8px -18px 79.5px 9px rgba(255, 255, 255, 0.25) inset, 1px 1px 22.9px 2px rgba(255, 141, 187, 0.81), 5px -4px 13.4px 0px rgba(99, 255, 128, 0.76);
+    backdrop-filter: blur(11.399999618530273px);
+}
+
+.sbcontent{
+    padding-left: 27px;
+    padding-right: 27px;
+}
+
+.sbcontent h3 {
+    color: #FFF;
+    font-family: "Work Sans";
+    font-size: 27px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -1.35px;
+    margin-bottom: 10px;
+}   
+
+.toggleie {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    justify-self: center;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    height: 61px;
+    flex-shrink: 0;
+    border-radius: 7px;
+    background: #363131;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+    gap: 10px
+}
+
+.incometoggle,
+.expensetoggle {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Work Sans";
+    font-size: 22px;
+    font-weight: 500;
+    cursor: pointer;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 8px;
+    transition: background-color 0.3s ease;
+}
+
+input[id="income"]:checked + label {
+    border-radius: 8px;
+    background-color: rgb(25, 104, 58);
+}
+
+input[id="expense"]:checked + label {
+    border-radius: 8px;
+    background: #731A1A;
+}
+
+.toggleie input[type="radio"] {
+      display: none;
+}
