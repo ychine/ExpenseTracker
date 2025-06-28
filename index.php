@@ -8,7 +8,33 @@ if ($conn->connect_error) {
     
 }
 
+$selectedMonth = isset($_GET['month']) ? $_GET['month'] : date('Y-m');
+
+
+$expenses = [];
+$expenseQuery = "SELECT * from expenses ORDER BY date DESC";
+$expenseStmt = $conn->prepare($expenseQuery);
+$expenseStmt->execute();
+$expenseResult = $expenseStmt->get_result();
+
+while ($row = $expenseResult->fetch_assoc()) {
+    $expenses[] = $row;
+}
  
+$groupedExpenses = [];
+foreach ($expenses as $expense) {
+    $monthKey = date('Y-m', strtotime($expense['Date']));
+    $groupedExpenses[$monthKey][] = $expense;
+}
+
+$currentExpenses = isset($groupedExpenses[$selectedMonth]) ? $groupedExpenses[$selectedMonth] : [];
+
+$currentDate = DateTime::createFromFormat('Y-m', $selectedMonth);
+$prevMonth = $currentDate->modify('-1 month')->format('Y-m');
+$currentDate->modify('+2 month');
+$nextMonth = $currentDate->format('Y-m');
+
+
 ?> 
 
 <!DOCTYPE html>
@@ -60,23 +86,72 @@ if ($conn->connect_error) {
         <div class="header">
             <div class="title">
                 <img src="./logo.svg">
-                <h2>Expense Tracker</h2>
+                <h2>ExpenseTracker</h2>
             </div>
             
             <h4>by Angela Sapaula</h4>
         </div>
     
-        <div class="smoothbox">
+        <div class="rowdiv">
+            <div class="smoothbox">
+                <h2><?= date('F Y', strtotime($selectedMonth . '-01')) ?></h2>
             
+                <?php
+                    $totalincome = 0; 
+                    $totalexpenses = 0; 
 
+                        foreach ($expenses as $expense):
+                            if ($expense['Type'] === 'Income') {
+                                $totalincome += $expense['Amount'];
+                            } else {
+                                $totalexpenses += $expense['Amount'];
+                            }
+                        endforeach;
+
+                        echo nl2br("\nPhp " . number_format($totalincome, 2));
+                        echo nl2br("\nPhp " . number_format($totalexpenses, 2));
+                     
+                ?>
+
+
+                Total Balance in Wallet:
+                
+                    <?php 
+                        $total = 0; 
+
+                        foreach ($expenses as $expense): 
+                        $total = ($expense['Type'] === 'Income') 
+                            ? $total + $expense['Amount'] 
+                            : $total - $expense['Amount'];
+                        endforeach;
+
+                        echo nl2br("\nPhp " . number_format($total, 2));
+                     
+                    ?>
+               
+
+            </div>
+
+            <div class="menubtns">
+                <button id="addbtn" class="addbtn" onclick="toggleAddModal()">
+                    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                        <rect x="16" y="6" width="4" height="24" rx="2" fill="#FFF"/>
+                        <rect x="6" y="16" width="24" height="4" rx="2" fill="#FFF"/>
+                    </svg>
+                </button>
+
+                <button id="recordbtn" class="recordbtn" onclick="window.location.href='./records.php'">
+                    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                    <rect x="8" y="6" width="20" height="24" rx="2" fill="#FFF" stroke="#000" stroke-width="2"/>
+                    <rect x="12" y="10" width="12" height="2" rx="1" fill="#000"/>
+                    <rect x="12" y="15" width="12" height="2" rx="1" fill="#000"/>
+                    <rect x="12" y="20" width="8" height="2" rx="1" fill="#000"/>
+                    </svg>
+                </button>
+
+
+            </div>
         </div>
-
-        <button id="addbtn" class="addbtn" onclick="toggleAddModal()">
-            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-                <rect x="16" y="6" width="4" height="24" rx="2" fill="#FFF"/>
-                <rect x="6" y="16" width="24" height="4" rx="2" fill="#FFF"/>
-            </svg>
-        </button>
 
         <div id="bgblr" class="bgblr"></div>
         <div id="add-modal" class="add-modal">
