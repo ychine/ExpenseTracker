@@ -46,15 +46,29 @@ document.addEventListener('DOMContentLoaded', function () {
         "Bonus",
         "Gift",
         "Interest",
-        "Freelance"
+        "Allowance",
+        "Benefits",
+        "Scholarship",
+        "Refund",
+        "Royalties",
+        "Freelance",
+        "Miscellaneous"
     ];
 
     const expenseOptions = [
-        "Utilities",
         "Housing",
+        "Utilities",
         "Transportation",
         "Debt",
-        "Personal Care"
+        "Groceries",
+        "Food & Dining",
+        "Personal Care",
+        "Health & Medical",
+        "Entertainment",
+        "Education",
+        "Gifts & Donations",
+        "Savings",
+        "Miscellaneous"
     ];
 
     function updateDescriptionOptions(options) {

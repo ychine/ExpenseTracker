@@ -125,24 +125,24 @@ sort($availableMonths);
                             }
                         endforeach;
                         ?>
-                        <div class="dashbdescriptor">Total Income:
-                            <span class="value">
-                                <?php
-                                echo nl2br("\nPhp " . number_format($totalincome, 2));
-                                ?>
-                            </span>
+                        <div class="dashbdescriptor">
+                            <span>Total Income:</span>
+                            <h5 class="value vgreen">
+                                <?php echo nl2br(number_format($totalincome, 2)); ?>
+                            </h5>
                         </div>
-                        <div class="dashbdescriptor">Total Expenses:
-                            <span class="value">
-                                <?php
-                                echo nl2br("\nPhp " . number_format($totalexpenses, 2));
-                                ?>
-                            </span>
+
+                        <div class="dashbdescriptor">
+                            <span>Total Expenses:</span>
+                            <h5 class="value red">
+                                <?php echo nl2br("-". number_format($totalexpenses, 2)); ?>
+                            </h5>
                         </div>
                     
                 </div>
                 <br>
-                Total Balance in Wallet:
+                <div class="baldesc">
+                    Total Balance in Wallet:
                 
                     <?php 
                         $total = 0; 
@@ -152,11 +152,13 @@ sort($availableMonths);
                             ? $total + $expense['Amount'] 
                             : $total - $expense['Amount'];
                         endforeach;
-
+                        ?>
+                    <span class="totalcumulated">  
+                        <?php 
                         echo nl2br("\nPhp " . number_format($total, 2));
-                     
-                    ?>
-               
+                        ?>
+                    </span> 
+               </div>
 
             </div>
 

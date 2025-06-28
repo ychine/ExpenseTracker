@@ -121,11 +121,6 @@ while ($row = $expenseResult->fetch_assoc()) {
                                             <path d="M4 21h4.586l11.95-11.95a1.5 1.5 0 0 0 0-2.121l-2.464-2.464a1.5 1.5 0 0 0-2.121 0L4 16.414V21zM17.293 5.293l1.414 1.414-1.172 1.172-1.414-1.414 1.172-1.172z"/>
                                         </svg>
                                     </a>
-                                    <a href="delete.php?id=<?= $expense['RecordID'] ?>" class="action-btn delete" title="Delete" onclick="return confirm('Are you sure you want to delete this?');">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24">
-                                            <path d="M6 7v14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6zm3 3h2v9H9v-9zm4 0h2v9h-2v-9zM15.5 4l-1-1h-5l-1 1H5v2h14V4h-3.5z"/>
-                                        </svg>
-                                    </a>
                                 </td>
 
                             </tr>
