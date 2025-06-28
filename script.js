@@ -6,6 +6,11 @@ function toggleAddModal() {
     bgBlur.classList.toggle('show');
 }
 
+function changeMonth(month) {
+    console.log('changeMonth called with:', month);
+    window.location.href = 'index.php?month=' + month;
+}
+
 window.addEventListener('click', function (event) {
     const addModal = document.getElementById('add-modal');
     const openButton = document.getElementById('addbtn'); 

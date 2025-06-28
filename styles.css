@@ -624,15 +624,60 @@ input[id="expense"]:checked + label {
 }
 
 .smoothbox {
+    width: 404px;
+    height: 387px;
+    flex-shrink: 0;
     border-radius: 30px;
     border: 6px solid #121212;
     background: #000;
-    box-shadow: 1px 4px 12.8px 27px rgba(0, 0, 0, 0.71) inset, -8px -18px 79.5px 9px rgba(255, 255, 255, 0.25) inset, 12px -11px 14.6px -3px #78AA96, 1px 5px 22.9px 2px rgba(255, 141, 187, 0.51);
+    box-shadow: 0px 5px 17.8px 26px rgba(0, 0, 0, 0.61) inset, -8px -18px 79.5px 9px rgba(255, 255, 255, 0.25) inset, 1px 1px 10px 2px rgba(255, 141, 187, 0.7), 5px -4px 10px 0px rgba(99, 255, 128, 0.7);
     backdrop-filter: blur(11.399999618530273px);
-    width: 404px;
-    height: 347px;
-    flex-shrink: 0;
-    z-index: -2;
+    padding: 30px;
+    box-sizing: border-box;
+    color: white;
+    font-family: 'Work Sans', sans-serif;
+}
+
+.month-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.month-navigation h3{
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+}
+
+.nav-arrow {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-arrow:hover:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+}
+
+.nav-arrow:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.nav-arrow svg {
+    width: 20px;
+    height: 20px;
 }
 
 .rowdiv {
@@ -641,4 +686,53 @@ input[id="expense"]:checked + label {
     gap: 10px;
     margin-top: 30px;
     color: white;
+}
+
+.dashbdescriptor {
+    color: #FFF;
+    flex: 1;
+    font-family: "Roboto Flex";
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 200;
+    line-height: normal;
+    letter-spacing: 0.34px;
+}
+
+
+.totalie {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 30px; 
+
+}
+
+.smoothbox h2 {
+    margin-top: 0;
+    color: #FFF;
+
+    font-family: "Work Sans";
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -1.8px;
+    margin-bottom: 0;
+}
+
+.value {
+   
+    font-family: "Work Sans";
+    font-size: 31px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.62px;
+}
+
+@font-face {
+  font-family: 'DS-Digital';
+  src: url('https://yourdomain.com/fonts/DS-DIGI.woff2') format('woff2'),
+       url('https://yourdomain.com/fonts/DS-DIGI.woff') format('woff');
 }

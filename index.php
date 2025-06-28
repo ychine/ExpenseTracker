@@ -1,6 +1,7 @@
 <?php 
 
 //landing page :)
+
 // database connection
 $conn = new mysqli("localhost", "root", "", "exptrack");
 if ($conn->connect_error) {
@@ -9,7 +10,6 @@ if ($conn->connect_error) {
 }
 
 $selectedMonth = isset($_GET['month']) ? $_GET['month'] : date('Y-m');
-
 
 $expenses = [];
 $expenseQuery = "SELECT * from expenses ORDER BY date DESC";
@@ -30,10 +30,11 @@ foreach ($expenses as $expense) {
 $currentExpenses = isset($groupedExpenses[$selectedMonth]) ? $groupedExpenses[$selectedMonth] : [];
 
 $currentDate = DateTime::createFromFormat('Y-m', $selectedMonth);
-$prevMonth = $currentDate->modify('-1 month')->format('Y-m');
-$currentDate->modify('+2 month');
-$nextMonth = $currentDate->format('Y-m');
+$prevMonth = (clone $currentDate)->modify('-1 month')->format('Y-m');
+$nextMonth = (clone $currentDate)->modify('+1 month')->format('Y-m');
 
+$availableMonths = array_keys($groupedExpenses);
+sort($availableMonths);
 
 ?> 
 
@@ -94,26 +95,53 @@ $nextMonth = $currentDate->format('Y-m');
     
         <div class="rowdiv">
             <div class="smoothbox">
-                <h2><?= date('F Y', strtotime($selectedMonth . '-01')) ?></h2>
-            
-                <?php
-                    $totalincome = 0; 
-                    $totalexpenses = 0; 
+                <h2>Dashboard</h2>
+                <div class="month-navigation">
+                    <button class="nav-arrow" onclick="changeMonth('<?= $prevMonth ?>')" title="Previous Month (<?= $prevMonth ?>)">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    
+                    <h3><?= date('F Y', strtotime($selectedMonth . '-01')) ?></h3>
+                    
+                    <button class="nav-arrow" onclick="changeMonth('<?= $nextMonth ?>')" title="Next Month (<?= $nextMonth ?>)">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="totalie">
+                    <?php
+                        $totalincome = 0; 
+                        $totalexpenses = 0; 
 
-                        foreach ($expenses as $expense):
+                        foreach ($currentExpenses as $expense):
                             if ($expense['Type'] === 'Income') {
                                 $totalincome += $expense['Amount'];
                             } else {
                                 $totalexpenses += $expense['Amount'];
                             }
                         endforeach;
-
-                        echo nl2br("\nPhp " . number_format($totalincome, 2));
-                        echo nl2br("\nPhp " . number_format($totalexpenses, 2));
-                     
-                ?>
-
-
+                        ?>
+                        <div class="dashbdescriptor">Total Income:
+                            <span class="value">
+                                <?php
+                                echo nl2br("\nPhp " . number_format($totalincome, 2));
+                                ?>
+                            </span>
+                        </div>
+                        <div class="dashbdescriptor">Total Expenses:
+                            <span class="value">
+                                <?php
+                                echo nl2br("\nPhp " . number_format($totalexpenses, 2));
+                                ?>
+                            </span>
+                        </div>
+                    
+                </div>
+                <br>
                 Total Balance in Wallet:
                 
                     <?php 
@@ -160,11 +188,10 @@ $nextMonth = $currentDate->format('Y-m');
     </div>
 
 
+    
+
+    
     <script src="./script.js"></script>
-
-
-
-
 </body>
 
 </html>
