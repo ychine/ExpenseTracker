@@ -5,7 +5,6 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Get the record ID from URL
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
 if ($id <= 0) {
@@ -13,7 +12,6 @@ if ($id <= 0) {
     exit();
 }
 
-// Fetch the record data
 $stmt = $conn->prepare("SELECT * FROM expenses WHERE RecordID = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
@@ -26,7 +24,6 @@ if ($result->num_rows === 0) {
 
 $record = $result->fetch_assoc();
 
-// Convert datetime to format suitable for datetime-local input
 $datetime = date('Y-m-d\TH:i', strtotime($record['Date']));
 ?>
 
